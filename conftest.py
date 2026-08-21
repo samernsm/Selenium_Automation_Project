@@ -2,9 +2,8 @@ import os
 from pathlib import Path
 
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
+ 
+from utils.driver_factory import create_driver
 from config.settings import LOGIN_URL
 from pages.login_page import LoginPage
 from pages.secure_page import SecurePage
@@ -15,13 +14,7 @@ SCREENSHOTS_DIR = Path("screenshots")
 
 @pytest.fixture
 def driver():
-    options = Options()
-
-    if os.getenv("CI"):
-        options.add_argument("--headless=new")
-        options.add_argument("--window-size=1920,1080")
-
-    driver = webdriver.Chrome(options=options)
+    driver = create_driver()
 
     yield driver
 
