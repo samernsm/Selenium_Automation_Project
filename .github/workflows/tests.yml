@@ -12,8 +12,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        browser:
+          - chrome
+          - firefox
+
     env:
-      BROWSER: chrome
+      BROWSER: ${{ matrix.browser }}
       HEADLESS: "true"
 
     steps:
@@ -33,21 +40,22 @@ jobs:
 
       - name: Run Selenium tests
         run: |
-          pytest -v --html=reports/report.html --self-contained-html
+          pytest -v \
+            --html=reports/${{ matrix.browser }}-report.html \
+            --self-contained-html
 
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: selenium-test-report
-          path: reports/report.html
+          name: selenium-test-report-${{ matrix.browser }}
+          path: reports/${{ matrix.browser }}-report.html
           if-no-files-found: warn
 
       - name: Upload failure screenshots
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: selenium-failure-screenshots
+          name: selenium-failure-screenshots-${{ matrix.browser }}
           path: screenshots/
           if-no-files-found: warn
-
