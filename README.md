@@ -1,3 +1,5 @@
+[![Selenium Tests](https://github.com/samernsm/Selenium_Automation_Project/actions/workflows/tests.yml/badge.svg)](https://github.com/samernsm/Selenium_Automation_Project/actions/workflows/tests.yml)
+
 # Selenium Automation Project
 
 A Python-based web UI test automation framework built with Selenium WebDriver and Pytest.
