@@ -13,6 +13,13 @@ class BasePage:
             ignored_exceptions=(StaleElementReferenceException,),
         )
 
+    def wait_for_url_contains(self, text):
+        return self.wait.until(
+            EC.url_contains(text)
+        )    
+
+
+
     def find_visible(self, locator):
         return self.wait.until(
             EC.visibility_of_element_located(locator)

@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from utils.logger import get_logger
-
+from config.settings import LOGIN_URL
 
 class LoginPage(BasePage):
 
@@ -29,7 +29,10 @@ class LoginPage(BasePage):
         self.logger.info("Flash message: %s", message)
 
         return message
-
+     
     def is_login_page_displayed(self):
-        return self.find_visible(self.LOGIN_HEADING).text == "Login Page"
+        self.wait_for_url_contains("/login")
 
+        return self.find_visible(
+            self.LOGIN_HEADING
+        ).text == "Login Page"    
