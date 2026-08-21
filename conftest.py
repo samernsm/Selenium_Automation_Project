@@ -1,24 +1,27 @@
+import os
 from pathlib import Path
 
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+from config.settings import LOGIN_URL
 from pages.login_page import LoginPage
 from pages.secure_page import SecurePage
-from config.settings import LOGIN_URL
 
 
 SCREENSHOTS_DIR = Path("screenshots")
 
-@pytest.fixture
-def secure_page(driver):
-    return SecurePage(driver)
-
-
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
+    options = Options()
+
+    if os.getenv("CI"):
+        options.add_argument("--headless=new")
+        options.add_argument("--window-size=1920,1080")
+
+    driver = webdriver.Chrome(options=options)
 
     yield driver
 
@@ -29,6 +32,11 @@ def driver():
 def login_page(driver):
     driver.get(LOGIN_URL)
     return LoginPage(driver)
+
+
+@pytest.fixture
+def secure_page(driver):
+    return SecurePage(driver)
 
 
 @pytest.hookimpl(hookwrapper=True)
