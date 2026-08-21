@@ -354,7 +354,7 @@ screenshots/
 
 A representative failure screenshot is included below:
 
-![Failure Screenshot](portfolio_images/failure-screenshot.png)
+![Failure Screenshot](portfolio_images/failure_screenshot.png)
 
 Generated execution screenshots are excluded from Git through `.gitignore`.
 
@@ -405,7 +405,7 @@ reports/report.html
 
 ### HTML Report Example
 
-![HTML Test Report](portfolio_images/html-report.png)
+![HTML Test Report](portfolio_images/html_report.png)
 
 ---
 
@@ -456,7 +456,7 @@ Upload test artifacts
 
 ### GitHub Actions Example
 
-![GitHub Actions](portfolio_images/github-actions.png)
+![GitHub Actions](portfolio_images/github_actions.png)
 
 ---
 
